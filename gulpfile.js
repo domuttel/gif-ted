@@ -20,7 +20,11 @@ gulp.task('connect', function() {
 
 gulp.task('html', function () {
   gulp.src('*.html')
-    .pipe(connect.reload());
+    .pipe(connect.reload())
+    // browserSync
+    .pipe(browserSync.reload({
+      stream: true
+    }))
 });
 
 gulp.task('css', function () {
@@ -33,7 +37,11 @@ gulp.task('css', function () {
 gulp.task('jshint', function() {
   return gulp.src('js/*.js')
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint.reporter('jshint-stylish'))
+    // browserSync
+    .pipe(browserSync.reload({
+      stream: true
+    }))
 });
 
 // configure sass
