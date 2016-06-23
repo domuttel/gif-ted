@@ -1,20 +1,16 @@
-$(document).on('ready', function() {
-  // giphy api variables
-  var giphyApi = "http://api.giphy.com/v1/gifs/search?";
-  var giphyApiKey = "&api_key=dc6zaTOxFJmzC&limit=5";
-  var giphyQuery = "&q=";
-  var collectedInputValue;
+var giphyApi = "http://api.giphy.com/v1/gifs/search?";
+var giphyApiKey = "&api_key=dc6zaTOxFJmzC&limit=5";
+var giphyQueryType = "&q=";
 
-  function gifGrab(e) {
-    e.preventDefault();
-    var collectedInputValue = document.getElementById('inputText').value;
-    return false;
+var xhr = new XMLHttpRequest();
+xhr.open('GET', giphyApi + giphyQueryType + 'ryan-gosling' + giphyApiKey);
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4) {
+    document.getElementById('ajax').innerHTML = xhr.responseText;
   }
+};
 
-  collectedInputValue = $('#giphyForm').submit(console.log(gifGrab));
-
-  var xhr = $.get(giphyApi + giphyQuery + collectedInputValue + giphyApiKey);
-  xhr.done(function(data) {
-     console.log("success got data", data);
-   });
-});
+function sendAJAX() {
+  xhr.send();
+  document.getElementById('loadGifs');
+}
